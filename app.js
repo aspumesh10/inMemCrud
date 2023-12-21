@@ -73,6 +73,9 @@ if (cluster.isPrimary) {
 
     childApp.listen(process.env.PORT);
     router(childApp);
+    childApp.use((req, res)=>{
+        return res.status(404).json({message: "Not found", status : 404})
+    });
     //setup redisClient
   	global.redisConnection = require("./redisConnector.js");
 }
